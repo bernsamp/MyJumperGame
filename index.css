@@ -1,12 +1,19 @@
 body {
-    background-color:#c3c3c3;
- }
- 
- h1 {
+    background-color: #c3c3c3;
+}
+
+h1 {
     color: #4c6ebb;
- }
- 
- canvas {
-     width: 100%;
-     background-color: black;
- } 
+}
+
+canvas {
+    width: 100%;
+    background-color: black;
+}
+
+.buttons {
+    display: inline;
+    width: 25px;
+    margin-left: 50px;
+    margin-right: auto;
+}
