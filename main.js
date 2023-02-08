@@ -1,95 +1,72 @@
 window.onload = function() {
-
-    let btn = document.getElementById("jump");
-
+    let upButton = document.getElementById('up');
+    let leftButton = document.getElementById('left')
+    let downButton = document.getElementById('down');
+    let rightButton = document.getElementById('right')
     let count = 0;
-
-    var canvas = document.getElementById("canvas");
+    let canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
     var x = 300;
     var y = 350;
-
-    
+    let t = Date.now();
+    let speedInit = 40;
+    let speed = speedInit;
 
     context.arc(x, y, 50, 0, 2 * Math.PI);
     context.fillStyle="red";
     context.fill();
 
-    btn.onclick = function() {
-
-        function draw(){
-
-    count += 1;
-
-    //changing the y position
-    y -= 25;
-
-    //clearing the canvas
-    context.clearRect(0, 0, 600, 400);
-   
-    //redrawing the circle   
-    context.beginPath();
-    context.arc(x, y, 50, 0, 2 * Math.PI);
-    context.fillStyle="red";
-    context.fill();
-
-    //drawing the count value
-    context.font = '25px Arial';
-    context.fillStyle = 'white';
-    context.fillText("Count: " + count, 20, 30);
-
-    if(y<=0+50){
-        y=375
+    upButton.onclick = function() {
+        count += 1;
+        y -= 25;
+        speed = speedInit;
     }
 
-    var timePassed = (Date.now() - t) / 1000;
+    leftButton.onclick = function() {
+        count += 1;
+        x -= 25;
+        speed = speedInit;
+    }
 
-t = Date.now();
+    rightButton.onclick = function() {
+        count += 1;
+        x += 25;
+        speed = speedInit;
+    }
 
-if(y <= 350) {
+    downButton.onclick = function() {
+        count += 1;
+        y += 25;
+        speed = speedInit;
+    }
 
-  speed += 50 * timePassed;
 
-  y += speed*timePassed;
+    function draw() {
+        var timePassed = (Date.now() - t) / 1000;
+        t = Date.now();
 
-} 
-
-if(y > 350) {
-
-  count = 0
-
-} 
+        if(y <= 350) {
+            speed += 50 * timePassed;
+            y += speed*timePassed;
         }
-    window.requestAnimationFrame(draw);
+
+        if(y > 350) {
+            count = 0
         }
 
-    document.onkeydown = function() {
+        context.clearRect(0, 0, 600, 400);
 
-        function drawother(){
+        context.beginPath();
+        context.arc(x, y, 50, 0, 2 * Math.PI);
+        context.fillStyle="red";
+        context.fill();
 
-  count += 1;
+        context.font = '25px Arial';
+        context.fillStyle = 'white';
+        context.fillText("Count: " + count, 20, 30);
 
-  y -= 25;
+        window.requestAnimationFrame(draw);
+    }
 
-  context.clearRect(0, 0, 600, 400);
-   
-    //redrawing the circle   
-    context.beginPath();
-    context.arc(x, y, 50, 0, 2 * Math.PI);
-    context.fillStyle="red";
-    context.fill();
-
-    //drawing the count value
-    context.font = '25px Arial';
-    context.fillStyle = 'white';
-    context.fillText("Count: " + count, 20, 30);
-
-    if(y<=0+50){
-        y=375
-
+    draw();
 }
-window.requestAnimationFrame(drawother);
-
-        }
-    }
-    }  
